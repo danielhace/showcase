@@ -21,6 +21,10 @@ Also always relevant given this project's goals:
 
 Everything else (process skills like `brainstorming`, `systematic-debugging`, `test-driven-development`, etc., and any other skill) — apply normally, inferred per task.
 
+## Verifying changes — never launch the emulator
+
+`./gradlew build`, `assembleDebug`, `test`, and `lint` are fine to run freely. **Never run `installDebug`/`installRelease`, `./gradlew connectedAndroidTest`, or any other task that boots an emulator or deploys to a device** — starting the emulator makes the user's machine very slow. This applies regardless of what a plan or spec says; if a strategy would otherwise require installing/running the app to verify a change, stop at build/lint/unit-test verification instead and tell the user what manual on-device check they should do themselves. Manual install/run is the user's to trigger, not Claude's.
+
 ## Git workflow (Gitflow)
 
 - `main` — always production-ready. Never commit directly; only receives merges from `release/*` or `hotfix/*`, tagged on merge (e.g. `v0.1.0`).
