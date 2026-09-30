@@ -20,3 +20,13 @@ Also always relevant given this project's goals:
 - `dataviz` — only if/when a feature involves charts, graphs, or dashboards
 
 Everything else (process skills like `brainstorming`, `systematic-debugging`, `test-driven-development`, etc., and any other skill) — apply normally, inferred per task.
+
+## Git workflow (Gitflow)
+
+- `main` — always production-ready. Never commit directly; only receives merges from `release/*` or `hotfix/*`, tagged on merge (e.g. `v0.1.0`).
+- `develop` — integration branch, latest completed work. Base for all `feature/*` branches.
+- `feature/<name>` — one feature/fix per branch, cut from `develop`, merged back into `develop` when done.
+- `release/<version>` — cut from `develop` to stabilize a release; merges into both `main` and `develop`.
+- `hotfix/<name>` — urgent production fix, cut from `main`, merges into both `main` and `develop`.
+
+Default to working on a `feature/*` branch off `develop` unless told otherwise.
