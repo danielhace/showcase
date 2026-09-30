@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -24,3 +25,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Daniel Showcase"
 include(":app")
+include(":core:design-system")
+include(":core:presentation")
+include(":feature:home:presentation")
