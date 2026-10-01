@@ -28,6 +28,7 @@ dependencies {
     implementation(project(":core:design-system"))
     implementation(project(":core:presentation"))
     implementation(project(":feature:home:presentation"))
+    implementation(project(":feature:facedetection:presentation"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)

@@ -43,14 +43,14 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeRoot(
-    onNavigateToPlaceholder: (itemId: String, itemTitle: String) -> Unit,
+    onNavigateToFaceDetection: () -> Unit,
     viewModel: HomeViewModel = koinViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     ObserveAsEvents(viewModel.events) { event ->
         when (event) {
-            is HomeEvent.NavigateToDetail -> onNavigateToPlaceholder(event.itemId, event.itemTitle)
+            HomeEvent.NavigateToFaceDetection -> onNavigateToFaceDetection()
         }
     }
 
@@ -158,10 +158,7 @@ private fun HomeScreenPreview() {
         HomeScreen(
             state = HomeState(
                 items = listOf(
-                    HomeItemUi("1", "Motion choreography", "Orchestrated, physics-based transitions across a full screen."),
-                    HomeItemUi("2", "Gesture-driven navigation", "Predictive back and drag-to-dismiss on the platform gesture APIs."),
-                    HomeItemUi("3", "Shared element transitions", "Seamless element continuity carried between two distinct screens."),
-                    HomeItemUi("4", "Custom shaders", "AGSL-backed visual effects rendered directly on the GPU."),
+                    HomeItemUi("face-detection", "Live face detection", "CameraX and ML Kit tracking faces in real time."),
                 ),
             ),
             onAction = {},

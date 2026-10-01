@@ -2,7 +2,6 @@ package com.danielhc.showcase.feature.home.presentation.home
 
 import app.cash.turbine.test
 import assertk.assertThat
-import assertk.assertions.hasSize
 import assertk.assertions.isEqualTo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -30,20 +29,29 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `initial state has exactly 15 items`() {
+    fun `face detection is the first item`() {
         val viewModel = HomeViewModel()
 
-        assertThat(viewModel.state.value.items).hasSize(15)
+        assertThat(viewModel.state.value.items.first().id).isEqualTo(FACE_DETECTION_ID)
     }
 
     @Test
-    fun `clicking an item sends NavigateToDetail with matching id and title`() = runTest {
+    fun `clicking face detection sends NavigateToFaceDetection`() = runTest {
         val viewModel = HomeViewModel()
-        val item = viewModel.state.value.items.first()
 
         viewModel.events.test {
-            viewModel.onAction(HomeAction.OnItemClick(item.id))
-            assertThat(awaitItem()).isEqualTo(HomeEvent.NavigateToDetail(item.id, item.title))
+            viewModel.onAction(HomeAction.OnItemClick(FACE_DETECTION_ID))
+            assertThat(awaitItem()).isEqualTo(HomeEvent.NavigateToFaceDetection)
+        }
+    }
+
+    @Test
+    fun `clicking an unknown item sends nothing`() = runTest {
+        val viewModel = HomeViewModel()
+
+        viewModel.events.test {
+            viewModel.onAction(HomeAction.OnItemClick("unknown"))
+            expectNoEvents()
         }
     }
 }
